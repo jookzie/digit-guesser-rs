@@ -1,14 +1,15 @@
 use crate::node::Node;
 use crate::image::Image;
 
+
 #[derive(Clone)]
 struct Model {
-    weights:        Vec<f64>,
-    biases:         Vec<f64>,
-    height:         usize,
-    width:          usize,
-    input_height:   usize,
-    output_height:  usize
+    weights:        Vec<f64>, // All weights (connections) between nodes
+    biases:         Vec<f64>, // Every node has a bias, except the input nodes
+    input_height:   usize,    // The input layer node count
+    output_height:  usize,    // The output layer node count
+    height:         usize,    // Hidden layer node count
+    width:          usize,    // Number of hidden layers
 }
 
 impl Model {
