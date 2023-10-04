@@ -11,15 +11,26 @@ impl Image {
     }
 
     pub fn display(&self) {
-        for i in 0..(self.rows * self.columns) {
-            if self.pixels[i] == 0 {
-                print!(" ")
-            } else {
-                print!("█")
+        let line = vec!["─"; self.columns * 2].into_iter().collect::<String>(); 
+
+        println!("╭{}╮", &line);
+        
+        for (i, pixel) in self.pixels.iter().enumerate() {
+            if i == 0 {
+                print!("│")
+            } else if i % self.columns == 0 {
+                print!("│\n│")
             }
-            if i % self.columns == 0 {
-                println!()
+            if *pixel == 0 {
+                print!("⬜")  
+            } else {
+                print!("⬛")
+            }
+            if i == self.pixels.len() - 1 {
+                print!("│")
             }
         }
+
+        println!("\n╰{}╯", &line);
     }
 }
