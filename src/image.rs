@@ -1,15 +1,19 @@
-use std::fmt;
+use std::{fmt, ops::{Deref, DerefMut}};
 
 pub struct Image {
     pixels: Vec<u8>,
-    label: u8,
+    label: usize,
     rows: usize,
     columns: usize,
 }
 
 impl Image {  
-    pub fn new(pixels: Vec<u8>, label: u8, rows: usize, columns: usize) -> Self {
+    pub fn new(pixels: Vec<u8>, label: usize, rows: usize, columns: usize) -> Self {
         Image { pixels, label, rows, columns }
+    }
+
+    pub fn label(&self) -> usize {
+        self.label
     }
 }
 
@@ -38,8 +42,22 @@ impl fmt::Display for Image {
         }
 
         output.push_str(&format!("\n╰{}╯\n", &line));
+        output.push_str(&format!("Label: {}", self.label));
 
         write!(f, "{}", output)
     }
 }
 
+impl Deref for Image {
+    type Target = Vec<u8>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.pixels
+    }
+}
+
+impl DerefMut for Image {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.pixels
+    }
+}
