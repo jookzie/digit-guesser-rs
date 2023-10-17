@@ -5,7 +5,7 @@ use crate::image::Image;
 const MAGIC_IMAGE_NUMBER: u32 = 2051;
 const MAGIC_LABEL_NUMBER: u32 = 2049;
 
-pub fn parse_datasets(image_buffer: Vec<u8>, label_buffer: Vec<u8>) -> Vec<Image> {
+pub fn parse_datasets(image_buffer: &Vec<u8>, label_buffer: &Vec<u8>) -> Vec<Image> {
     assert!(image_buffer.len() > 16, "Image buffer is less than header (16 bytes).");
     assert!(label_buffer.len() > 8, "Label buffer is less than header (8 bytes).");
 

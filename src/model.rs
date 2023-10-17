@@ -1,4 +1,3 @@
-use core::fmt;
 use std::ops::{SubAssign, AddAssign};
 
 use rand::rngs::ThreadRng;
@@ -20,17 +19,21 @@ impl Model {
             output_layer: Layer::random(10, 16, rng),
         }
     }
-    pub fn feed_forward(&mut self, image: &Image) -> f64 {
+
+    pub fn feed_forward(&mut self, image: &Image) -> usize {
         for (node, pixel) in self.input_layer.iter_mut().zip(image.iter()) {
             node.value = f64::from(*pixel);
         }
+
         self.hidden_layer.evaluate(&self.input_layer);
         self.output_layer.evaluate(&self.hidden_layer);
 
-        let mut perfect_output = [0.0; 10];
-        perfect_output[image.label()] = 1.0;
-
-        self.output_layer.cost(&perfect_output)
+        self.output_layer
+            .iter()
+            .enumerate()
+            .max_by(|(_, n1), (_, n2)| n1.value.total_cmp(&n2.value))
+            .unwrap()
+            .0
     }
 }
 
@@ -41,17 +44,6 @@ impl Default for Model {
             hidden_layer: Layer::new(16, 784),
             output_layer: Layer::new(10, 16)
         }
-    }
-}
-
-impl fmt::Display for Model {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let mut output = String::new();
-
-        output.push_str("Hidden layer:\n");
-        output.push_str(&format!("{}", self.hidden_layer));
-
-        write!(f, "{output}")
     }
 }
 

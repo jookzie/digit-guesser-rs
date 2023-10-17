@@ -42,7 +42,6 @@ impl fmt::Display for Image {
         }
 
         output.push_str(&format!("\n╰{}╯\n", &line));
-        output.push_str(&format!("Label: {}", self.label));
 
         write!(f, "{}", output)
     }

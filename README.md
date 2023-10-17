@@ -2,7 +2,8 @@
 The project is a rust implementation of guessing hand-written digits using a deep learning algorithm, with the help of the [MNIST database](http://yann.lecun.com/exdb/mnist/).
 It has been heavily inspired by [3Blue1Brown's video](https://www.youtube.com/watch?v=aircAruvnKk) introduction to deep learning.
 
-This project's main purpose personally is to learn more about rust, hence the minimal amount of crates.
+<img src="./demo/seven.jpg"/>
+
 
 # Running
 1. Install [rust](https://www.rust-lang.org/)
@@ -18,8 +19,14 @@ cargo run --release
 
 # Progress
 - [x] Parse database files
-- [ ] Serialize/deseralize model
+- [x] Train model
+- [x] Test model
 - [ ] Command line interface
-- [ ] Train model
-- [ ] Test model
+- [ ] Serialize/deseralize model
+- [ ] Multi-threading
 
+# Status
+So far, the trained models manage to guess the digits 36% of the time.
+Most likely the backprop is subpar and needs optimizations.
+
+P.S. I have not had any AI courses, this is purely an attempt to learn rust and deep learning.
