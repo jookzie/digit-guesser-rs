@@ -22,6 +22,8 @@ cargo run --release
 - [x] Train model
 - [x] Test model
 - [ ] Command line interface
+- [ ] Benchmarks
+- [ ] Tests
 - [ ] Serialize/deseralize model
 - [ ] Multi-threading
 
